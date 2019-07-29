@@ -1,9 +1,17 @@
 package args;
 
 public class Param {
+
     String key;
+
     String type;
+
     String value;
+
+    public Param(String key,String type){
+        this.key = key;
+        this.type = type;
+    }
 
     public String getKey(){
         return key;
