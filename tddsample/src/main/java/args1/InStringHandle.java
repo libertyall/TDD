@@ -27,10 +27,12 @@ public class InStringHandle {
           mapParams.put(paramKey, param);
           break;
         }
-        if (null != param && (null == maps.get(paramAndValues[i+1]))) {
+        if (null != param && (null == maps.get(substringLine(paramAndValues[i+1])))) {
           param.setValue(paramAndValues[i+1]);
           mapParams.put(paramKey, param);
           ++i;
+        } else {
+          mapParams.put(paramKey, param);
         }
       }
     }
