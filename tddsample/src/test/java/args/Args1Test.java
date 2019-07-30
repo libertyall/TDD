@@ -33,5 +33,16 @@ public class Args1Test {
     assertEquals(maps.get("l").getType(),"bool");
     assertEquals(maps.get("d").getType(),"int");
     assertEquals(maps.get("f").getType(),"string");
+
+    Map<String, Param> mapParams = handle.inParamsToParams("-l true -d -9 -f /usr/local -s", maps);
+    assertEquals(mapParams.size(),4);
+    assertEquals(mapParams.get("l").getType(),"bool");
+    assertEquals(Boolean.valueOf(mapParams.get("l").getValue()),Boolean.TRUE);
+    assertEquals(mapParams.get("d").getType(),"int");
+    assertEquals(Integer.valueOf(mapParams.get("d").getValue()),Integer.valueOf("-9"));
+    assertEquals(mapParams.get("f").getType(),"string");
+    assertEquals(mapParams.get("f").getValue(),"/usr/local");
+    assertEquals(mapParams.get("s").getType(),"string");
+    assertEquals(mapParams.get("s").getValue(),null);
   }
 }
