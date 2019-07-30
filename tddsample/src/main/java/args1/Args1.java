@@ -1,5 +1,9 @@
 package args1;
 
+import java.util.Map;
+
+import args.Param;
+
 public class Args1 {
 
   private final String types;
@@ -11,6 +15,10 @@ public class Args1 {
   }
 
   public Object getValue(String l){
-    return true;
+    InStringHandle handle = new InStringHandle();
+    Map<String,Param> maps = handle.inTypesToParams(types);
+    Map<String, Param> mapParams = handle.inParamsToParams(params, maps);
+    TransferHandle transferHandle = new TransferHandle(mapParams.get(l).getType(),mapParams.get(l).getValue());
+    return transferHandle.getValue();
   }
 }
