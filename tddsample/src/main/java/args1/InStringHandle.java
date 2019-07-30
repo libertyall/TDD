@@ -15,4 +15,31 @@ public class InStringHandle {
     }
     return maps;
   }
+
+  public Map<String,Param> inParamsToParams(String params,Map<String,Param> maps){
+    Map<String,Param> mapParams = new HashMap<>();
+    String[] paramAndValues = params.split(" ");
+    for (int i = 0; i < paramAndValues.length; i++) {
+      if (isStartsWithLine(paramAndValues[i])) {
+        String paramKey = substringLine(paramAndValues[i]);
+        Param param = maps.get(paramKey);
+        if (i == (paramAndValues.length -1)) {
+          mapParams.put(paramKey, param);
+          break;
+        }
+        if (null != param && (null == maps.get(paramAndValues[i+1]))) {
+          param.setValue(paramAndValues[i+1]);
+          mapParams.put(paramKey, param);
+          ++i;
+        }
+      }
+    }
+    return mapParams;
+  }
+  private boolean isStartsWithLine(String value) {
+    return value.startsWith("-");
+  }
+  private String substringLine(String value) {
+    return value.substring(1);
+  }
 }
