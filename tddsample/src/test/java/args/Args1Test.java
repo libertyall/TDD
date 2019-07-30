@@ -8,6 +8,7 @@ import org.junit.runners.JUnit4;
 
 import args1.Args1;
 import args1.InStringHandle;
+import args1.TransferHandle;
 
 import static org.junit.Assert.assertEquals;
 
@@ -44,5 +45,11 @@ public class Args1Test {
     assertEquals(mapParams.get("f").getValue(),"/usr/local");
     assertEquals(mapParams.get("s").getType(),"string");
     assertEquals(mapParams.get("s").getValue(),null);
+  }
+
+  @Test
+  public void test_2_transfer_tools(){
+    TransferHandle handle = new TransferHandle("bool", null);
+    assertEquals(handle.getValue(),Boolean.FALSE);
   }
 }
