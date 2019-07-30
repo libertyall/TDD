@@ -1,11 +1,13 @@
-package args;
+package args1;
 
 import java.util.Map;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import args.Param;
 import args1.Args1;
 import args1.InStringHandle;
 import args1.TransferHandle;
@@ -17,18 +19,26 @@ public class Args1Test {
 
   @Test
   public void test1(){
+    Args1 args1 = new Args1("l:bool,d:int,f:string","-l -d 8080 -f /usr/local");
+    assertEquals(args1.getValue("l"), Boolean.FALSE);
+    assertEquals(args1.getValue("d"), new Integer(8080));
+    assertEquals(args1.getValue("f"), "/usr/local");
   }
 
   @Test
   public void test_2(){
     Args1 args1 = new Args1("l:bool,d:int,f:string,s:string","-l true -d -9 -f /usr/local -s");
     assertEquals(args1.getValue("l"),Boolean.TRUE);
+    assertEquals(args1.getValue("d"),new Integer(-9));
+    assertEquals(args1.getValue("f"),"/usr/local");
+    assertEquals(args1.getValue("s"),null);
   }
 
+  @Ignore
   @Test
   public void test_2_tools(){
     InStringHandle handle = new InStringHandle();
-    Map<String, Param> maps = handle.inTypesToParams("l:bool,d:int,f:string,s:string");
+    Map<String,Param> maps = handle.inTypesToParams("l:bool,d:int,f:string,s:string");
     assertEquals(maps.size(),4);
     assertEquals(maps.get("l").getKey(),"l");
     assertEquals(maps.get("l").getType(),"bool");
@@ -47,6 +57,7 @@ public class Args1Test {
     assertEquals(mapParams.get("s").getValue(),null);
   }
 
+  @Ignore
   @Test
   public void test_2_transfer_tools(){
     TransferHandle handle = new TransferHandle("bool", null);
